@@ -1,0 +1,25 @@
+<odoo>
+    <record id="module_bar_category" model="ir.module.category">
+        <field name="name">Bar</field>
+    </record>
+    <record id="bar_group_waiter" model="res.groups">
+        <field name="name">Waiter</field>
+        <field name="category_id" ref="module_bar_category" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+    </record>
+    <record id="bar_group_cook" model="res.groups">
+        <field name="name">Cook</field>
+        <field name="category_id" ref="module_bar_category" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+    </record>
+    <record id="bar_group_barman" model="res.groups">
+        <field name="name">Barman</field>
+        <field name="category_id" ref="module_bar_category" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+    </record>
+    <record id="bar_group_admin" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_bar_category" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+    </record>
+</odoo>

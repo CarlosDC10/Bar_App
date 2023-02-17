@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="bar_app.productq_model_form_barman" >
+            <field name="name">Order Form Barman</field>
+            <field name="model">bar_app.productq_model</field>
+            <field name="inherit_id" ref="bar_app.productq_model_form"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//form//sheet" position="before">
+                    <header>
+                        <button name="isPreparedBarman" type="object" string="Prepared" class="oe_highlight"/>
+                    </header>
+              </xpath>     
+            </field>
+        </record>
+        <record model="ir.ui.view" id="bar_app.productq_model_list_barman">
+            <field name="name">Order Tree Barman</field>
+            <field name="model">bar_app.productq_model</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="numTable" decoration-danger="state != 'D'"/>
+                    <field name="product" decoration-danger="state != 'D'"/>
+                    <field name="quant" decoration-danger="state != 'D'"/>
+                    <field name="observations" decoration-danger="state != 'D'"/>
+                    <field name="price" decoration-danger="state != 'D'"/>
+                    <field name="state" decoration-danger="state != 'D'"/>
+                    <field name="destiny" decoration-danger="state != 'D'"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="bar_app.action_window_productq_list_barman">
+            <field name="name">Order List Barman</field>
+            <field name="res_model">bar_app.productq_model</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'O'),('destiny','=','B')]</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+              (0, 0, {'view_mode': 'tree', 'view_id': ref('bar_app.productq_model_list_barman')}),
+              (0, 0, {'view_mode': 'form', 'view_id': ref('bar_app.productq_model_form_barman')})]"/>
+        </record>
+    </data>
+</odoo>

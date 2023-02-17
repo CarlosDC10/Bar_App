@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="bar_app.productq_model_form_waiter" >
+            <field name="name">Order Form Waiter</field>
+            <field name="model">bar_app.productq_model</field>
+            <field name="inherit_id" ref="bar_app.productq_model_form"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+              <xpath expr="//form//sheet" position="before">
+                    <header>
+                        <button name="isDelivered" type="object" string="Delivered" class="oe_highlight"/>
+                        <button name="isPreparedWaiter" type="object" string="Prepared" class="oe_highlight"/>
+                    </header>
+              </xpath>     
+            </field>
+        </record>
+        <record model="ir.ui.view" id="bar_app.productq_model_list_waiter">
+            <field name="name">Order Tree Waiter</field>
+            <field name="model">bar_app.productq_model</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="numTable" decoration-success="state != 'D'"/>
+                    <field name="product" decoration-success="state != 'D'"/>
+                    <field name="quant" decoration-success="state != 'D'"/>
+                    <field name="observations" decoration-success="state != 'D'"/>
+                    <field name="price" decoration-success="state != 'D'"/>
+                    <field name="state" decoration-success="state != 'D'"/>
+                    <field name="destiny" decoration-success="state != 'D'"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="bar_app.action_window_productq_list_waiter">
+            <field name="name">Order List Waiter</field>
+            <field name="res_model">bar_app.productq_model</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'P')]</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+              (0, 0, {'view_mode': 'tree', 'view_id': ref('bar_app.productq_model_list_waiter')}),
+              (0, 0, {'view_mode': 'form', 'view_id': ref('bar_app.productq_model_form_waiter')})]"/>
+        </record>
+    </data>
+</odoo>

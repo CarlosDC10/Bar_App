@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <style>
+                        td,th{
+                        border-style: solid;
+                        border-width: 1px;
+                        }
+                        table{
+                            font-size: 35px;
+                            width: 100%;
+                        }
+                        .name{
+                            text-align:center;
+                        }
+                        .quant{
+                            text-align:center;
+                        }
+                        .price{
+                            text-align:center;
+                        }
+                        .borderless{
+                            border-width: 0px;
+                        }
+                    </style>
+                    <hr/>
+                    <div class="page">
+                        <p>
+                            <h2>Reference: <span t-field="o.ref" /></h2>
+                        </p>
+                        <p>
+                            <h2>Date: <span t-field="o.date" /></h2>
+                        </p>
+                        <p>
+                            <h2>Client: <span t-field="o.client" /></h2>
+                        </p>
+                        <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                        <table>
+                            <tr>
+                                <th class="name">Name</th>
+                                <th class="quant">Quantity</th>
+                                <th class="price">Price</th>
+                            </tr>
+                            <t t-foreach="o.products" t-as="item">
+                                <tr>
+                                    <td class="prodname">
+                                        <span t-field="item.product.name" />
+                                    </td>
+                                    <td class="quant">
+                                        <span t-field="item.quant" />
+                                    </td>
+                                    <td class="price">
+                                        <span t-field="item.price" />€
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td rowspan="3" class="borderless"></td>
+                                <th class="quant">Base:</th>
+                                <td class="price"><span t-field="o.base"/>€</td>
+                            </tr>
+                            <tr>
+                                <th class="quant">AVT:</th>
+                                <td class="price"><span t-field="o.avt"/></td>
+                            </tr>
+                            <tr>
+                                <th class="quant">Total:</th>
+                                <td class="price"><span t-field="o.total"/>€</td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="table_invoice" model="ir.actions.report">
+        <field name="name">Invoices</field>
+        <field name="model">bar_app.invoice_model</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">bar_app.report_view</field>
+        <field name="report_file">bar_app.report_view</field>
+        <field name="print_report_name">'Invoice-Table'</field>
+        <field name="binding_model_id" ref="model_bar_app_invoice_model" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

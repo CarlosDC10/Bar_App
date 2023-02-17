@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="bar_app.productq_model_form">
+            <field name="name">Order Form</field>
+            <field name="model">bar_app.productq_model</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="product">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="price" />
+                                </tree>
+                            </field>
+                            <field name="quant" />
+                            <field name="observations" />
+                            <field name="price" />
+                            <field name="state" />
+                            <field name="destiny" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="bar_app.productq_model_list">
+            <field name="name">Order Tree</field>
+            <field name="model">bar_app.productq_model</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="numTable" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                    <field name="product" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                    <field name="quant" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                    <field name="observations" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                    <field name="price" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                    <field name="state" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                    <field name="destiny" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="bar_app.action_window_productq_list">
+            <field name="name">Order List</field>
+            <field name="res_model">bar_app.productq_model</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

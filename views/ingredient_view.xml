@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="bar_app.ingredient_model_form">
+            <field name="name">Ingredient Form</field>
+            <field name="model">bar_app.ingredient_model</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="glutenFree" type="object" string="Gluten free" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="gluten" readonly="True"/>
+                            <field name="observations"/>
+                            <field name="products">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="price"/>
+                                    <field name="available"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="bar_app.ingredient_model_list">
+            <field name="name">Ingredient List</field>
+            <field name="model">bar_app.ingredient_model</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="observations"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="bar_app.action_window_ingredient_list">
+            <field name="name">Ingredient List</field>
+            <field name="res_model">bar_app.ingredient_model</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

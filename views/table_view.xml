@@ -1,0 +1,81 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="bar_app.table_model_form">
+            <field name="name">table Form</field>
+            <field name="model">bar_app.table_model</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="isActive" type="object" string="End Table" class="oe_highlight" states="E"/>
+                        <button name="orderGiven" type="object" string="Order Served" class="oe_highlight" states="W"/>
+                        <button name="orderTaken" type="object" string="Order Taken" class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="num" />
+                            <field name="diners"/>
+                            <field name="client"/>
+                            <field name="waiter"/>
+                            <field name="products">
+                                <tree>
+                                    <field name="product" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                                    <field name="quant" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                                    <field name="price" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                                    <field name="state" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                                    <field name="destiny" decoration-danger="state == 'O'" decoration-success="state == 'P'"/>
+                                </tree>
+                            </field>
+                            <field name="total" readonly="True"/>
+                            <field name="active" invisible="True" />
+                            <field name="dateFinished" readonly="True"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="bar_app.table_model_list">
+            <field name="name">table List</field>
+            <field name="model">bar_app.table_model</field>
+            <field name="arch" type="xml">
+                <tree decoration-danger="stateOrder == True">
+                    <field name="num" />
+                    <field name="diners"/>
+                    <field name="client"/>
+                    <field name="waiter"/>
+                    <field name="total" readonly="True"/>
+                    <field name="state" />
+                    <field name="active" invisible="True" />
+                    <field name="stateOrder" invisible="True"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="bar_app.table_model_calendar">
+            <field name="name">Table Calendar</field>
+            <field name="model">bar_app.table_model</field>
+            <field name="arch" type="xml">
+                <calendar date_start="dateFinished" color="waiter" mode="month" quick_add="false">
+                    <field name="num" />
+                    <field name="dateFinished"/>
+                    <field name="client"/>
+                    <field name="diners"/>
+                </calendar>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="bar_app.table_model_graph">
+            <field name="name">Table Graph</field>
+            <field name="model">bar_app.table_model</field>
+            <field name="arch" type="xml">
+                <graph type="bar">
+                    <field name="num" type="row" />
+                    <field name="total" type="measure" />
+                </graph>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="bar_app.action_window_table_list">
+            <field name="name">table List</field>
+            <field name="res_model">bar_app.table_model</field>
+            <field name="view_mode">tree,calendar,form,graph</field>
+        </record>
+    </data>
+</odoo>
